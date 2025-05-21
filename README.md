@@ -61,17 +61,66 @@ This repository accompanies our research on process discovery, introducing an en
   ```
 
 ## 📊 Datasets
-The repository includes several real-life event logs from the 4TU Centre for Research Data. These are located in the event_logs/ folder and are in .xes format. However, please note that due to size limitations, only a subset of the event logs are included here, but they can all be downloaded [HERE](https://www.tf-pm.org/resources/logs) and put into the event log folder.
+The repository includes several real-life event logs from the 4TU Centre for Research Data. These are located in the event_logs/ folder and are in .xes format. However, please note that due to size limitations, only a subset of the event logs are included here, but they can all be downloaded [HERE](https://www.tf-pm.org/resources/logs) and put into the log folder.
 
 ## 🧪 Reproducibility
-Each script in produce_figures/ and produce_data/ generates a specific result from the paper, eg.
-  ```bash
-    # Generate Figure 5a
-    python3 produce_figures/generate_figure_5a.py
-    
-    # Generate Table 2
-    python3 produce_figures/generate_table_2.py
-  ```
+Each script in `produce_figures/` and `produce_data/` generates specific results from the paper. The resulting data and figures are stored in the `data/` and `figures/` folders, respectively.
+
+You can choose to generate both data and figures, or only the figures. The `data/` folder is pre-populated for convenience, but you can regenerate it by running the scripts in `produce_data/`. Please note that regenerating the data can be time-consuming — estimated runtimes are provided in the relevant commands.
+
+Important: Some experiments are not fully independent, so we strongly recommend running the data-generation scripts in the order specified below to ensure consistency.
+
+Running the data-generation scripts is optional — all required data is already included. Below you’ll find the commands to generate each figure or table.
+
+### Table I
+```bash
+# Produce Table I
+python3 produce_figures/generate_table_1.py 
+```
+### Table II
+```bash
+# Produce data for Table II
+python3 produce_data/generate_table_2.py          # TIME ESTIMATE: 
+# Produce Table 2
+python3 produce_figures/generate_table_2.py
+```
+### Figure 5a
+```bash
+# Produce data for Figure 5a
+python3 produce_data/generate_figure_5a.py        # TIME ESTIMATE: 
+# Produce Figure 5a
+python3 produce_figures/generate_figure_5a.py
+```
+### Figure 5b
+```bash
+# Produce data for Figure 5b
+python3 produce_data/generate_figure_5b.py         # TIME ESTIMATE: 
+
+# Produce Figure 5b
+python3 produce_figures/generate_figure_5b.py
+```
+### Figure 5c
+```bash
+# Produce data for Figure 5c
+python3 produce_data/generate_figure_5c.py          # TIME ESTIMATE: 
+
+# Produce Figure 5c
+python3 produce_figures/generate_figure_5c.py
+```
+### Figure 5d
+```bash
+# Produce data for Figure 5d
+python3 produce_data/generate_figure_5d.py           # TIME ESTIMATE: 
+
+# Produce Figure 5b
+python3 produce_figures/generate_figure_5d.py
+```
+
+
+
+
+
+
 
 ## 📜 License
 This project is licensed under the terms of the MIT License. See LICENSE for more information.

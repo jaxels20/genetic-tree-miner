@@ -81,7 +81,7 @@ python3 produce_figures/generate_table_1.py
 ```bash
 # Produce data for Table II
 python3 produce_data/generate_table_2.py          # TIME ESTIMATE: 
-# Produce Table 2
+# Produce Table II
 python3 produce_figures/generate_table_2.py
 ```
 ### Figure 5a
@@ -115,11 +115,6 @@ python3 produce_data/generate_figure_5d.py           # TIME ESTIMATE:
 # Produce Figure 5b
 python3 produce_figures/generate_figure_5d.py
 ```
-
-
-
-
-
 
 
 ## 📜 License

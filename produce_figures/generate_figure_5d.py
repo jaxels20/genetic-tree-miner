@@ -40,7 +40,7 @@ def visualize_paper_figure():
                     )
 
     df = pd.DataFrame(data)
-    df.replace({"Line Type": {"inductive_tree_generator": "IM Tree Generator", "random_tree_generator": "Random Tree Generator"}}, inplace=True)
+    df.replace({"Line Type": {"inductive_tree_generator": "GTM Initial Population", "random_tree_generator": "Random Initial Population"}}, inplace=True)
     
     # Aggregate 
     aggregated = df.groupby(["Line Type", "Generation"], as_index=False).mean(numeric_only=True)
@@ -69,7 +69,7 @@ def visualize_paper_figure():
         lt: marker_symbols[i % len(marker_symbols)]
         for i, lt in enumerate(line_types)
     }
-    step = 10
+    step = 2
       
     # 2) create the figure and add one trace per (Dataset, Line Type)
     fig = go.Figure()
@@ -86,8 +86,7 @@ def visualize_paper_figure():
             showlegend=False,
             line=dict(color=color_map[lt], dash="solid", width=2)
         ))
-        offset = i % step  # e.g., dataset 0 starts at 0, dataset 1 at 1, etc.
-        marker_df = grp_lt.iloc[offset::step]  # start from 'offset', then every 'step'
+        marker_df = grp_lt.iloc[0::step]  # start from 'offset', then every 'step'
         fig.add_trace(go.Scatter(
             x=marker_df["Generation"],
             y=marker_df["Fitness"],

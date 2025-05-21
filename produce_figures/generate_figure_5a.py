@@ -17,7 +17,7 @@ def plot_data(df):
         'population_size': 'Population Size',
         'percentage_of_log': 'Percentage of Log',
         'log_filtering': 'Log Filtering',
-        'tournament_size': 'Tournament Size',
+        'tournament_size': 'Tournament Size Rate',
         'tournament_rate': 'Tournament Rate',
         'tournament_mutation_rate': 'Mutation Rate',
         'generator': 'Generator',
@@ -63,7 +63,7 @@ def plot_data(df):
                 values=values
             ))
 
-    desired_col_order = ['Tournament Size', 'Mutation Rate', 'Tournament Rate', 'Random Creation Rate', 
+    desired_col_order = ['Tournament Size Rate', 'Mutation Rate', 'Tournament Rate', 'Random Creation Rate', 
                         'Elite Rate',
                         'Population Size',
                         'Log Filtering']
@@ -73,7 +73,7 @@ def plot_data(df):
     dimensions = [dimensions_dict[col] for col in desired_col_order]
 
     custom_ylim = {
-        'Tournament Size' : [0.1, 0.3],
+        'Tournament Size Rate' : [0.1, 0.3],
         'Tournament Rate' : [0,1],
         'Mutation Rate' : [0,1], 
         'Random Creation Rate' : [0,1],
@@ -83,7 +83,7 @@ def plot_data(df):
     }
 
     y_tick_vals = {
-        'Tournament Size' : [x / 100 for x in range(10, 32, 4)],
+        'Tournament Size Rate' : [x / 100 for x in range(10, 32, 4)],
         'Tournament Rate' : [x / 100 for x in range(0, 102, 20)],
         'Mutation Rate' : [x / 100 for x in range(0, 102, 20)], 
         'Random Creation Rate' : [x / 100 for x in range(0, 102, 20)],
@@ -121,8 +121,8 @@ def plot_data(df):
 
     # Layout adjustments
     fig.update_layout(
-        font=dict(family='Courier New', size=14),
-        margin=dict(l=60, r=80, t=50, b=90),
+        font=dict(family='Courier New', size=14, color='black'),
+        margin=dict(l=70, r=80, t=50, b=90),
         template='simple_white',
         height=400,
         width=850

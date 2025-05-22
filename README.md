@@ -16,7 +16,7 @@ This repository contains the code and data for the paper **_Reborn and Refined: 
 │   ├── table_1.tex
 │   └── ...
 │   
-├── real_life_datasets/       # Real-world event logs in XES format
+├── logs/       # Real-world event logs in XES format
 │   ├── 2013-cp.xes
 │   └── ...
 │

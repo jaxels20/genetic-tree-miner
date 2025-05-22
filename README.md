@@ -75,7 +75,7 @@ Running the data-generation scripts is optional — all required data is already
 ### Table I
 ```bash
 # Produce Table I
-python3 produce_figures/generate_table_1.py 
+python3 produce_figures/generate_table_1.py       # TIME ESTIMATE: ~10 minutes
 ```
 ### Table II
 ```bash

@@ -61,7 +61,7 @@ This repository accompanies our research on process discovery, introducing an en
   ```
 
 ## 📊 Datasets
-The repository includes several real-life event logs from the 4TU Centre for Research Data. These are located in the event_logs/ folder and are in .xes format. However, please note that due to size limitations, only a subset of the event logs are included here, but they can all be downloaded [HERE](https://www.tf-pm.org/resources/logs) and put into the log folder.
+The repository includes several real-life event logs from the 4TU Centre for Research Data. These are located in the `logs/` folder and are in .xes format. However, please note that due to size limitations, only a subset of the event logs are included here, but they can all be downloaded [HERE](https://www.tf-pm.org/resources/logs) and put into the log folder.
 
 ## 🧪 Reproducibility
 Each script in `produce_figures/` and `produce_data/` generates specific results from the paper. The resulting data and figures are stored in the `data/` and `figures/` folders, respectively.

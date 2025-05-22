@@ -17,6 +17,7 @@ def consolidate_results(GTM_df):
     column_order = ['Dataset', 'Discovery Method', 'F1 Score', 'Log Fitness', 'Precision', 'Generalization', 'Simplicity', 'Objective Fitness', 'Time (s)']
     df = df[column_order]
     df.sort_values(by=['Dataset', 'Discovery Method'], inplace=True)
+    df['Objective Fitness'] = df['Objective Fitness'] / 100
     df['Time (s)'] = df['Time (s)'].replace('-', 0)
     
     agg_df = df.copy()

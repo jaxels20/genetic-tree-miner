@@ -66,7 +66,7 @@ The repository includes several real-life event logs from the 4TU Centre for Res
 ## 🧪 Reproducibility
 Each script in `produce_figures/` and `produce_data/` generates specific results from the paper. The resulting data and figures are stored in the `data/` and `figures/` folders, respectively.
 
-You can choose to generate both data and figures, or only the figures. The `data/` folder is pre-populated for convenience, but you can regenerate it by running the scripts in `produce_data/`. Please note that regenerating the data can be time-consuming — estimated runtimes are provided in the relevant commands.
+You can choose to generate both data and figures, or only the figures. The `data/` folder is pre-populated for convenience, but you can regenerate it by running the scripts in `produce_data/`. Please note that regenerating the data can be time-consuming — the estimated runtimes (assuming all event logs) are provided in the relevant commands.
 
 Important: Some experiments are not fully independent, so we strongly recommend running the data-generation scripts in the order specified below to ensure consistency.
 

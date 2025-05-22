@@ -46,7 +46,16 @@ This repository accompanies our research on process discovery, introducing an en
    source .venv/bin/activate
    pip install -r requirements.txt
    ```
-4. Build FastTokenBasedReplay (make sure cmake, pybind11, and googletest are installed)
+3. Install systemwide dependencies (platform-specific)
+   The packages needed are cmake, pybind11, googletest, and graphviz. These can be installed with apt/brew on POSIX. on Mac, e.g.
+      ```bash
+   brew install cmake
+   brew install pybind11
+   brew install googletest
+   brew install graphviz
+   ```
+   
+5. Build FastTokenBasedReplay (make sure cmake, pybind11, and googletest are installed)
    ```bash
    cd src/FastTokenBasedReplay/
    mkdir build && cd build
@@ -54,6 +63,7 @@ This repository accompanies our research on process discovery, introducing an en
    make
    cd ../../..
    ```
+   
    
 ## ▶️ Usage
 

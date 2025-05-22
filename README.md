@@ -80,21 +80,21 @@ python3 produce_figures/generate_table_1.py
 ### Table II
 ```bash
 # Produce data for Table II
-python3 produce_data/generate_table_2.py          # TIME ESTIMATE: 
+python3 produce_data/generate_table_2.py          # TIME ESTIMATE: ~6 hours
 # Produce Table II
 python3 produce_figures/generate_table_2.py
 ```
 ### Figure 5a
 ```bash
 # Produce data for Figure 5a
-python3 produce_data/generate_figure_5a.py        # TIME ESTIMATE: 
+python3 produce_data/generate_figure_5a.py        # TIME ESTIMATE: ~18 hours
 # Produce Figure 5a
 python3 produce_figures/generate_figure_5a.py
 ```
 ### Figure 5b
 ```bash
 # Produce data for Figure 5b
-python3 produce_data/generate_figure_5b.py         # TIME ESTIMATE: 
+python3 produce_data/generate_figure_5b.py         # TIME ESTIMATE: ~5 seconds
 
 # Produce Figure 5b
 python3 produce_figures/generate_figure_5b.py
@@ -102,7 +102,7 @@ python3 produce_figures/generate_figure_5b.py
 ### Figure 5c
 ```bash
 # Produce data for Figure 5c
-python3 produce_data/generate_figure_5c.py          # TIME ESTIMATE: 
+python3 produce_data/generate_figure_5c.py          # TIME ESTIMATE: ~8 hours
 
 # Produce Figure 5c
 python3 produce_figures/generate_figure_5c.py
@@ -110,7 +110,7 @@ python3 produce_figures/generate_figure_5c.py
 ### Figure 5d
 ```bash
 # Produce data for Figure 5d
-python3 produce_data/generate_figure_5d.py           # TIME ESTIMATE: 
+python3 produce_data/generate_figure_5d.py           # TIME ESTIMATE: ~16 hours
 
 # Produce Figure 5b
 python3 produce_figures/generate_figure_5d.py

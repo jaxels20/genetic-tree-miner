@@ -56,8 +56,14 @@ This repository accompanies our research on process discovery, introducing an en
    ```
    
 ## ▶️ Usage
+
+To run discovery and save the discovered Petri net as a `.pdf` file, run:
   ```bash
     python3 GTM.py --log_path logs/2013-cp.xes --output_path output.pdf --max_generations 5
+  ```
+Or to save it as a `.pnml` file, run:
+  ```bash
+    python3 GTM.py --log_path logs/2013-cp.xes --output_path output.pnml --max_generations 5
   ```
 
 ## 📊 Datasets

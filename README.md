@@ -1,4 +1,4 @@
-# Reborn and Refined: An Enhanced Genetic Algorithm for Process Discovery
+# 🧬 Reborn and Refined: An Enhanced Genetic Algorithm for Process Discovery
 
 This repository contains the code and data for the paper **_Reborn and Refined: An Enhanced Genetic Algorithm for Process Discovery_**. It implements a novel process discovery algorithm using a genetic approach and provides tools to reproduce the results and figures from the paper.
 

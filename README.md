@@ -49,11 +49,11 @@ This repository accompanies our research on process discovery, introducing an en
 3. Install systemwide dependencies (platform-specific)
    The packages needed are cmake, pybind11, googletest, and graphviz. These can be installed with apt/brew on POSIX. on Mac, e.g.
    ```bash
-   brew install cmake, pybind11, googletest, graphviz # Mac with brew   
+   brew install cmake, pybind11, googletest, graphviz 
    ```
    and on linux:
    ```bash
-   sudo apt install cmake pybind11-dev libgtest-dev graphviz € Linux with apt
+   sudo apt install cmake pybind11-dev libgtest-dev graphviz
    ```
 
    

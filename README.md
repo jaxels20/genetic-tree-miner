@@ -50,6 +50,7 @@ This repository accompanies our research on process discovery, introducing an en
    The packages needed are cmake, pybind11, googletest, and graphviz. These can be installed with apt/brew on POSIX. on Mac, e.g.
       ```bash
    brew install cmake, pybind11, googletest, graphviz # Mac with brew
+   sudo apt install cmake pybind11-dev libgtest-dev graphviz € Linux with apt
    
    ```
    

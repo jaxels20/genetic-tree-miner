@@ -53,7 +53,7 @@ This repository accompanies our research on process discovery, introducing an en
    ```
    and on linux:
    ```bash
-      sudo apt install cmake pybind11-dev libgtest-dev graphviz € Linux with apt
+   sudo apt install cmake pybind11-dev libgtest-dev graphviz € Linux with apt
    ```
 
    

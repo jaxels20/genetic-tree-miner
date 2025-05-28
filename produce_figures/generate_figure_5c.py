@@ -129,7 +129,7 @@ def visualize_paper_figure():
         height=600,
         template='simple_white',
         legend=dict(
-            font=dict(size=14, family="Time New Roman"),
+            font=dict(size=18, family="Time New Roman"),
             orientation="h",
             yanchor="bottom",
             #entrywidth=55,
@@ -140,7 +140,7 @@ def visualize_paper_figure():
     )
     
     fig.update_yaxes(
-        range=[45, 100],
+        range=[40, 100],
     )
     
     # write the file to the output directory

@@ -68,8 +68,8 @@ def generate_data(method: callable, runs: int):
             metrics['Time (s)'] = time_taken
             data.append(metrics)
             
-        df = pd.DataFrame(data)
-        df.to_csv(f"{OUTPUT_DIR}/evaluation_results/results_GTM.csv", index=False)
+    df = pd.DataFrame(data)
+    df.to_csv(f"{OUTPUT_DIR}/evaluation_results/results_GTM.csv", index=False)
     
 if __name__ == "__main__":
     # convert the hyper parameters to a normalize

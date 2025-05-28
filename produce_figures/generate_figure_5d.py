@@ -112,7 +112,7 @@ def visualize_paper_figure():
         height=600,
         template='simple_white',
         legend=dict(
-            font=dict(size=14, family="Times New Roman"),
+            font=dict(size=18, family="Times New Roman"),
             orientation="h",
             yanchor="bottom",
             y=0.01,

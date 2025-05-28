@@ -1,4 +1,4 @@
-# Reborn and Refined: An Enhanced Genetic Algorithm for Process Discovery
+# 🧬 Reborn and Refined: An Enhanced Genetic Algorithm for Process Discovery
 
 This repository contains the code and data for the paper **_Reborn and Refined: An Enhanced Genetic Algorithm for Process Discovery_**. It implements a novel process discovery algorithm using a genetic approach and provides tools to reproduce the results and figures from the paper.
 
@@ -16,7 +16,7 @@ This repository contains the code and data for the paper **_Reborn and Refined: 
 │   ├── table_1.tex
 │   └── ...
 │   
-├── real_life_datasets/       # Real-world event logs in XES format
+├── logs/       # Real-world event logs in XES format
 │   ├── 2013-cp.xes
 │   └── ...
 │
@@ -46,7 +46,18 @@ This repository accompanies our research on process discovery, introducing an en
    source .venv/bin/activate
    pip install -r requirements.txt
    ```
-4. Build FastTokenBasedReplay (make sure cmake, pybind11, and gtest are installed)
+3. Install systemwide dependencies (platform-specific)
+   The packages needed are cmake, pybind11, googletest, and graphviz. These can be installed with apt/brew on POSIX. on Mac, e.g.
+   ```bash
+   brew install cmake, pybind11, googletest, graphviz 
+   ```
+   and on linux:
+   ```bash
+   sudo apt install cmake pybind11-dev libgtest-dev graphviz
+   ```
+
+   
+5. Build FastTokenBasedReplay (make sure cmake, pybind11, and googletest are installed)
    ```bash
    cd src/FastTokenBasedReplay/
    mkdir build && cd build
@@ -55,13 +66,20 @@ This repository accompanies our research on process discovery, introducing an en
    cd ../../..
    ```
    
+   
 ## ▶️ Usage
+
+To run discovery and save the discovered Petri net as a `.pdf` file, run:
   ```bash
     python3 GTM.py --log_path logs/2013-cp.xes --output_path output.pdf --max_generations 5
   ```
+Or to save it as a `.pnml` file, run:
+  ```bash
+    python3 GTM.py --log_path logs/2013-cp.xes --output_path output.pnml --max_generations 5
+  ```
 
 ## 📊 Datasets
-The repository includes several real-life event logs from the 4TU Centre for Research Data. These are located in the event_logs/ folder and are in .xes format. However, please note that due to size limitations, only a subset of the event logs are included here, but they can all be downloaded [HERE](https://www.tf-pm.org/resources/logs) and put into the log folder.
+The repository includes several real-life event logs from the 4TU Centre for Research Data. These are located in the `logs/` folder and are in .xes format. However, please note that due to size limitations, only a subset of the event logs are included here, but they can all be downloaded [HERE](https://www.tf-pm.org/resources/logs) and put into the log folder.
 
 ## 🧪 Reproducibility
 Each script in `produce_figures/` and `produce_data/` generates specific results from the paper. The resulting data and figures are stored in the `data/` and `figures/` folders, respectively.
@@ -75,7 +93,7 @@ Running the data-generation scripts is optional — all required data is already
 ### Table I
 ```bash
 # Produce Table I
-python3 produce_figures/generate_table_1.py 
+python3 produce_figures/generate_table_1.py       # TIME ESTIMATE: ~10 minutes
 ```
 ### Table II
 ```bash

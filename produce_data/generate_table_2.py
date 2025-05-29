@@ -33,10 +33,10 @@ def generate_data(method: callable, runs: int):
     # Remove all non xes files
     datasets = [dataset for dataset in datasets if dataset.endswith(".xes")]
 
+    data = []
     for dataset in datasets:
         eventlog = FileLoader.load_eventlog(f"{DATASET_DIR}{dataset}")
 
-        data = []
         for i in range(runs):
             print(f"Running discovery on dataset: {dataset} iteration: {i}")
             start = time.time()

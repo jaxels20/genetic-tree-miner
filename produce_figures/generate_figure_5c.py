@@ -47,23 +47,22 @@ def visualize_paper_figure():
     df = df[~df['Dataset'].str.contains("Nasa")]
     
     speeds = {
-        '2012': 11, 
-        '2013-cp': 0.1, 
-        '2013-i': 1.1, 
-        '2013-op': 0.1, 
-        '2017': 90, 
-        '2019': 70, 
-        '2020-dd': 0.2, 
-        '2020-id': 1.5, 
-        '2020-pl': 6.5, 
-        '2020-ptc': 0.3, 
-        '2020-rfp':5, 
-        'RTF': 1.6, 
-        'Sepsis': 0.6,
-        }
+        '2012': round(180 / 300, 1), 
+        '2013-cp': round(55 / 2, 1), 
+        '2013-i': round(65 / 25, 1), 
+        '2013-op': round(69 / 1.8, 1), 
+        '2017': round(204 / 106, 1), 
+        '2019': round(313 / 271, 1), 
+        '2020-dd': round(295 / 16, 1), 
+        '2020-id': round(238 / 160, 1), 
+        '2020-pl': round(141 / 300, 1), 
+        '2020-ptc': round(271 / 48, 1), 
+        '2020-rfp': round(169 / 11, 1), 
+        'RTF': round(72 / 3, 1), 
+        'Sepsis': round(156 / 53, 1),
+    }
     
-    
-    
+      
     colorblind_colors = [
     "#E69F00", "#56B4E9", "#009E73", "#F0E442",
     "#0072B2", "#D55E00", "#CC79A7", "#999999",
@@ -73,7 +72,7 @@ def visualize_paper_figure():
 
     marker_symbols = [
         "circle", "square", "diamond", "cross", "x", "triangle-up", "triangle-down",
-        "triangle-left", "triangle-right", "star", "hexagram", "hourglass", "arrow", "bowtie",
+        "triangle-left", "triangle-right", "star", "hexagram", "hourglass", "bowtie", "bowtie",
     ]
 
     # Step 1: Compute max fitness per dataset
@@ -109,7 +108,7 @@ def visualize_paper_figure():
             x=marker_df["Generation"],
             y=marker_df["Fitness"],
             mode='markers',
-            name=f"{dataset} ({speeds[dataset]}s)",
+            name=f"{dataset} ({speeds[dataset]})",
             showlegend=True,
             marker=dict(
                 symbol=marker_symbols[i],
@@ -123,13 +122,11 @@ def visualize_paper_figure():
         title=None,
         xaxis_title="Generation",
         yaxis_title="Objective Fitness",
-        font=dict(family='Times', size=16),
-        margin=dict(l=60, r=30, t=50, b=120),
-        width=900,
-        height=600,
+        font=dict(family='Times New Roman', size=20),
+        margin=dict(l=0, r=0, t=0, b=120),
         template='simple_white',
         legend=dict(
-            font=dict(size=18, family="Time New Roman"),
+            font=dict(size=14, family="Time New Roman"),
             orientation="h",
             yanchor="bottom",
             #entrywidth=55,
@@ -140,7 +137,7 @@ def visualize_paper_figure():
     )
     
     fig.update_yaxes(
-        range=[40, 100],
+        range=[45, 100],
     )
     
     # write the file to the output directory

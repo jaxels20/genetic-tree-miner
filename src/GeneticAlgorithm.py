@@ -9,8 +9,8 @@ from src.Filtering import Filtering
 import tqdm
 import time
 from typing import Union
-import os
-import time
+from src.utils import calculate_percentage_of_log
+
 class GeneticAlgorithm:
     def __init__(self, method_name):
         """
@@ -79,9 +79,12 @@ class GeneticAlgorithm:
         self.start_time = time.time()
         
         # Filter the log
-        filtered_eventlog = Filtering.filter_eventlog_by_top_percentage_unique(eventlog, percentage_of_log, True)
-        objective.set_event_log(eventlog)
-        mutator.set_event_log(eventlog)
+        if percentage_of_log is None:
+            percentage_of_log = calculate_percentage_of_log(eventlog.get_num_unique_traces())
+            filtered_eventlog = Filtering.filter_eventlog_by_top_percentage_unique(eventlog, percentage_of_log, True)
+
+        objective.set_event_log(filtered_eventlog)
+        mutator.set_event_log(filtered_eventlog)
         
         # Generate initial population
         if isinstance(generator, BottomUpRandomBinaryGenerator):

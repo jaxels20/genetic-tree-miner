@@ -3,25 +3,22 @@ import pickle
 import plotly.graph_objects as go
 import pandas as pd
 
-INPUT_DIR = './data/figure_5d/'
+INPUT_DIR_RANDOM = './data/figure_5d'
+INPUT_DIR_INDUCTIVE = './data/figure_5c/'
 OUTPUT_FILE = "./figures/figure_5d.pdf"
 
 def visualize_paper_figure():
-    experiments = [f.path for f in os.scandir(INPUT_DIR) if f.is_dir()]
     data = []
+    input_dirs = {'Random Tree Generator': INPUT_DIR_RANDOM, 'IM Tree Generator': INPUT_DIR_INDUCTIVE}
     
-    for d in experiments:
-        # Extract the folder name of d without the full path
-        folder_name = os.path.basename(d)
-        
-        subfolders = [f.path for f in os.scandir(d) if f.is_dir()]
-    
-        for subfolder in subfolders:
-            pkl_files = [f for f in os.listdir(subfolder + "/monitors") if f.endswith('.pkl')]
-        
-            for pkl_file in pkl_files:
-                with open(os.path.join(subfolder, "monitors", pkl_file), 'rb') as f:
-                    dataset_name, method_name, result_dict = pickle.load(f)                
+    for name_dir, input_dir in input_dirs.items():
+        for root, subdirs, files in os.walk(input_dir):
+            for pkl_file in files:
+                if not pkl_file.endswith('.pkl'):
+                    continue
+                
+                with open(os.path.join(root, pkl_file), 'rb') as f:
+                    dataset_name, method_name, result_dict = pickle.load(f)
                 
                 generations = list(result_dict.keys())
                 fitness_values = list(result_dict.values())
@@ -35,26 +32,20 @@ def visualize_paper_figure():
                             "Generation": generations[i],
                             "Fitness": fitness_values[i],
                             "Dataset": dataset_name,
-                            "Line Type": folder_name
+                            "Line Type": name_dir
                         }
                     )
 
     df = pd.DataFrame(data)
-    df.replace({"Line Type": {"inductive_tree_generator": "GTM Initial Population", "random_tree_generator": "Random Initial Population"}}, inplace=True)
     
     # Aggregate 
     aggregated = df.groupby(["Line Type", "Generation"], as_index=False).mean(numeric_only=True)
     aggregated["Dataset"] = "Aggregated"
-    
-    include_datasets = ["2019", "2017", "2020-pl"]
-    df = df[df["Dataset"].isin(include_datasets)]
 
     # 1) build a color‐map for each Line Type
     line_types = df["Line Type"].unique()
     colorblind_colors = [
-        "#0072B2", "#D55E00", "#999999",
-        "#117733", "#332288", "#88CCEE", "#44AA99",
-        "#661100", "#6699CC"
+        "black", "red"
     ]
     color_map = {
         lt: colorblind_colors[i % len(colorblind_colors)]
@@ -62,8 +53,7 @@ def visualize_paper_figure():
     }
     
     marker_symbols = [
-        "circle", "square", "diamond", "cross", "x", "triangle-up", "triangle-down",
-        "triangle-left", "triangle-right", "star", "hexagram", "hourglass", "arrow", "bowtie",
+        "x", "circle",
     ]
     marker_map = {
         lt: marker_symbols[i % len(marker_symbols)]
@@ -86,7 +76,7 @@ def visualize_paper_figure():
             showlegend=False,
             line=dict(color=color_map[lt], dash="solid", width=2)
         ))
-        marker_df = grp_lt.iloc[0::step]  # start from 'offset', then every 'step'
+        marker_df = grp_lt.iloc[::step]  # start from 'offset', then every 'step'
         fig.add_trace(go.Scatter(
             x=marker_df["Generation"],
             y=marker_df["Fitness"],
@@ -106,14 +96,12 @@ def visualize_paper_figure():
         title=None,
         xaxis_title="Generation",
         yaxis_title="Objective Fitness",
-        font=dict(family='Times', size=16),
-        margin=dict(l=60, r=30, t=50, b=120),
-        width=900,
-        height=600,
+        font=dict(family='Times New Roman', size=20),
+        margin=dict(l=0, r=0, t=0, b=120),
         template='simple_white',
         legend=dict(
             font=dict(size=18, family="Times New Roman"),
-            orientation="h",
+            orientation="v",
             yanchor="bottom",
             y=0.01,
             xanchor="right",
@@ -121,7 +109,7 @@ def visualize_paper_figure():
         )
     )
 
-    fig.update_yaxes(range=[35, 100])
+    fig.update_yaxes(range=[55, 100])
     
     # write the file to the output directory
     fig.write_image(OUTPUT_FILE)

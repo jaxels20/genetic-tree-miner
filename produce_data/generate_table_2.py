@@ -15,7 +15,6 @@ DATASET_DIR = "./logs/"
 BEST_PARAMS = "./best_parameters.csv"
 TIME_LIMIT = 60*5
 STAGNATION_LIMIT = 50
-PERCENTAGE_OF_LOG = 0.05
 OBJECTIVE = {
     "simplicity": 10,
     "refined_simplicity": 10,
@@ -24,31 +23,31 @@ OBJECTIVE = {
 }
 
 NUM_DATA_POINTS = 5
-OUTPUT_DIR = "./data/table_2/"
+OUTPUT_DIR = "./data/table_2"
 
-
-def generate_data(method: callable, runs: int):    
-    datasets = os.listdir(DATASET_DIR)
+def generate_data(method: callable, gtm_name, runs: int):    
+    datasets = [f for f in os.listdir(DATASET_DIR) if f.endswith(".xes")]
     
-    # Remove all non xes files
-    datasets = [dataset for dataset in datasets if dataset.endswith(".xes")]
-
     data = []
     for dataset in datasets:
+        if dataset != "2013-cp.xes":
+            continue
+        dataset_name = dataset.split(".")[0]
         eventlog = FileLoader.load_eventlog(f"{DATASET_DIR}{dataset}")
 
         for i in range(runs):
-            print(f"Running discovery on dataset: {dataset} iteration: {i}")
+            print(f"Running discovery on dataset: {dataset_name} iteration: {i}")
             start = time.time()
-            discovered_net = method(eventlog)
+            discovered_net, discovered_pt = method(eventlog)
             time_taken = time.time() - start
             
             os.makedirs(f"{OUTPUT_DIR}/models/GTM", exist_ok=True)
-            discovered_net.to_pnml(f"{OUTPUT_DIR}/models/GTM/{dataset}_{i}")
+            discovered_net.to_pnml(f"{OUTPUT_DIR}/models/GTM/{dataset_name}_{gtm_name}_{i}")
             
             evaluator = SingleEvaluator(
-                discovered_net,
-                eventlog
+                pn=discovered_net,
+                eventlog=eventlog,
+                pt=discovered_pt
             )
             
             # Get the evaluation metrics
@@ -57,7 +56,7 @@ def generate_data(method: callable, runs: int):
             
             metrics = {}
             metrics['Dataset'] = dataset.split(".")[0]
-            metrics['Discovery Method'] = "GM"
+            metrics['Discovery Method'] = gtm_name
             metrics['Model'] = i
             metrics['Log Fitness'] = fitness
             metrics['Precision'] = precision
@@ -69,23 +68,46 @@ def generate_data(method: callable, runs: int):
             data.append(metrics)
             
     df = pd.DataFrame(data)
-    df.to_csv(f"{OUTPUT_DIR}/evaluation_results/results_GTM.csv", index=False)
+    df.to_csv(f"{OUTPUT_DIR}/evaluation_results/results_{gtm_name}.csv", index=False)
     
 if __name__ == "__main__":
     # convert the hyper parameters to a normalize
     hyper_parameters = load_hyperparameters_from_csv(BEST_PARAMS)
     
     # Define model
-    genetic_miner = lambda log: Discovery.genetic_algorithm(
+    genetic_miner_1 = lambda log: Discovery.genetic_algorithm(
         log,
-        time_limit=TIME_LIMIT,
+        time_limit=10,
         stagnation_limit=STAGNATION_LIMIT,
-        percentage_of_log=PERCENTAGE_OF_LOG,
         **hyper_parameters,
     )
-    # Generate df with results over runs and write to csv
     generate_data(
-        method = genetic_miner,
+        method = genetic_miner_1,
+        gtm_name="GTM-10-test",
         runs=NUM_DATA_POINTS,
     )
+    
+    # genetic_miner_2 = lambda log: Discovery.genetic_algorithm(
+    #     log,
+    #     time_limit=60,
+    #     stagnation_limit=STAGNATION_LIMIT,
+    #     **hyper_parameters,
+    # )
+    # generate_data(
+    #     method = genetic_miner_2,
+    #     gtm_name="GTM-60",
+    #     runs=NUM_DATA_POINTS,
+    # )
+    
+    # genetic_miner_3 = lambda log: Discovery.genetic_algorithm(
+    #     log,
+    #     time_limit=300,
+    #     stagnation_limit=STAGNATION_LIMIT,
+    #     **hyper_parameters,
+    # )
+    # generate_data(
+    #     method = genetic_miner_3,
+    #     gtm_name="GTM-300",
+    #     runs=NUM_DATA_POINTS,
+    # )
 

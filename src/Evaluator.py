@@ -26,9 +26,10 @@ from pm4py.convert import convert_to_process_tree as convert_to_pt
 
 # This class can evaluate a discovered process model against an event log (only one!)
 class SingleEvaluator:
-    def __init__(self, pn: PetriNet, eventlog: EventLog):
+    def __init__(self, pn: PetriNet, eventlog: EventLog, pt: ProcessTree):
         self.eventlog = eventlog
         self.pn = pn
+        self.pt = pt
 
         # convert the eventlog to pm4py format
         self.pm4py_pn, self.init_marking, self.final_marking = self.pn.to_pm4py()

@@ -417,3 +417,14 @@ class EventLog:
             event_log_c.add_trace(fast_trace)
 
         return event_log_c
+    
+    def get_num_unique_traces(self):
+        """
+        Get the number of unique traces in the event log.
+        """
+        unique_traces = set()
+        for trace in self.traces:
+            # Create a tuple of event activities to represent the trace
+            trace_tuple = tuple(event.activity for event in trace.events)
+            unique_traces.add(trace_tuple)
+        return len(unique_traces)

@@ -16,7 +16,6 @@ import multiprocessing
 
 TIME_LIMIT = 5*60
 STAGNATION_LIMIT = 50
-PERCENTAGE_OF_LOG = 0.05
 OPTUNA_TIMEOUT_LIMIT = 60*60*18
 INPUT_DIR = "./logs/"
 OUTPUT_DIR = "./data/figure_5a/" 
@@ -58,20 +57,23 @@ def objective(trial, event_log):
 
     # Run the genetic miner
     try:
-        petri_net = Discovery.genetic_algorithm(
+        petri_net, process_tree = Discovery.genetic_algorithm(
             event_log,
             method_name="Genetic Miner",
             objective=Objective(metric_weights=OBJECTIVE),
             mutator=mutator,
             generator=generator,
-            percentage_of_log=PERCENTAGE_OF_LOG,
             population_size=population_size,
             stagnation_limit=STAGNATION_LIMIT,
             time_limit=TIME_LIMIT,
         )
 
         # Evaluate fitness — should return a single value (higher is better)
-        evaluator = SingleEvaluator(petri_net, event_log)
+        evaluator = SingleEvaluator(
+            pn=petri_net, 
+            eventlog=event_log, 
+            pt=process_tree
+        )
         fitness_score = evaluator.get_objective_fitness(OBJECTIVE)
 
         return fitness_score

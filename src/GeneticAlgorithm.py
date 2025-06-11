@@ -81,7 +81,7 @@ class GeneticAlgorithm:
         # Filter the log
         if percentage_of_log is None:
             percentage_of_log = calculate_percentage_of_log(eventlog.get_num_unique_traces())
-            filtered_eventlog = Filtering.filter_eventlog_by_top_percentage_unique(eventlog, percentage_of_log, True)
+        filtered_eventlog = Filtering.filter_eventlog_by_top_percentage_unique(eventlog, percentage_of_log, True)
 
         objective.set_event_log(filtered_eventlog)
         mutator.set_event_log(filtered_eventlog)

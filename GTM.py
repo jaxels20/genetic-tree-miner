@@ -22,8 +22,6 @@ def main(log_path: str, output_path: str, max_generations: int, time_limit: int,
         hyperparameters['time_limit'] = time_limit
         hyperparameters['max_generations'] = max_generations
         hyperparameters['stagnation_limit'] = stagnation_limit
-        hyperparameters["percentage_of_log"] = 0.05
-        
         
     except Exception as e:
         raise RuntimeError(f"Failed to load hyperparameters: {e}")
@@ -32,7 +30,7 @@ def main(log_path: str, output_path: str, max_generations: int, time_limit: int,
     # Run discovery algorithm
     try:
         print("Starting process discovery...")
-        pn = Discovery.genetic_algorithm(
+        pn, pt = Discovery.genetic_algorithm(
             el, 
             **hyperparameters)
         print("Process discovery completed successfully.")
